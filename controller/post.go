@@ -26,7 +26,7 @@ func CreatePostHandler(c *gin.Context) {
 	p := new(models.Post)
 	if err := c.ShouldBindJSON(p); err != nil {
 		zap.L().Debug("c.ShouldBindJSON() failed", zap.Any("err", err))
-		ResponseError(c, CodeInvalidParam)
+		ResponseErrorWithMsg(c, CodeInvalidParam, err.Error())
 		return
 	}
 	// 从 c 取到当前请求的用户ID
